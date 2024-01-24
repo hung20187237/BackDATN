@@ -24,6 +24,23 @@ router.post("/register", async (req, res) => {
   }
 });
 
+router.post("/change-password", async (req, res) => {
+  try {
+    const user = await User.findOne({ email: req.body.email });
+    const validOldPassword = await bcrypt.compare(req.body.oldpassword, user.password)
+    if(!validOldPassword){
+      return res.status(400).json("Sai mật khẩu hiện tại")
+    }
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(req.body.newpassword, salt);
+
+    user.password = hashedPassword;
+    res.status(200).json({ message: 'Password updated successfully' });
+  } catch (err) {
+    res.status(500).json({ error: err.message || 'Internal Server Error' });
+  }
+});
+
 //LOGIN
 router.post("/login", async (req, res) => {
   try {
