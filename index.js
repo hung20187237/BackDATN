@@ -234,6 +234,7 @@ const server = http.createServer(app);
 const io = socketIO(server, {
   cors: {
     origin: "https://aplus-review-food-fe.onrender.com",
+    methods: ["GET", "POST"]
   },
 });
 
