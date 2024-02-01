@@ -236,7 +236,7 @@ app.get('/api/top-posts', async (req, res) => {
 // });
 const server = http.createServer(app);
 
-server.listen(8900, () => {
+server.listen(process.env.SOCKET || 8900, () => {
   try {
     console.log('connection');
   } catch (e) {
