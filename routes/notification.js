@@ -54,7 +54,6 @@ router.get("/:sendUserId/:receiveUserId/:type", async (req, res) => {
           receiveUserId: req.params.receiveUserId,
           type: req.params.type
       });
-      console.log(FriendRequestNotification)
       
       res.status(200).json(FriendRequestNotification);
     } catch (err) {

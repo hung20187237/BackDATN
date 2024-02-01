@@ -31,10 +31,8 @@ router.get("/:id", async (req, res) => {
 //get id res
 router.get("/getId/:title", async (req, res) => {
   const resName = req.params.title;
-  console.log('resName', resName)
   try {
     const restaurant = await Restaurant.findOne({ name: resName });
-    console.log('restaurant', restaurant)
     res.status(200).json(restaurant._id);
   } catch (err) {
     res.status(500).json(err);

@@ -20,7 +20,6 @@ router.get("/:id", async (req, res) => {
     const commentId = req.params.id;
     try {
         const comment = await Comment.findById(commentId)
-        console.log('Comment', comment)
         res.status(200).json(comment);
     } catch (err) {
         res.status(500).json(err);

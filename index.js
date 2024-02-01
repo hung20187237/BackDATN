@@ -106,7 +106,6 @@ app.post('/api/check-image', uploadImage.array("media", 12), async (req, res) =>
 
 app.post('/api/check-content', async (req, res) => {
 
-  console.log('req.body', req.body)
 
   try {
     const data = new FormData();
@@ -230,7 +229,7 @@ app.get('/api/top-posts', async (req, res) => {
 
 // socket
 const server = http.createServer(app);
-
+console.log('server', server)
 const io = socketIO(server, {
   cors: {
     origin: "https://aplus-review-food-fe.onrender.com",
