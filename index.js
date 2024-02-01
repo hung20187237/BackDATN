@@ -5,6 +5,8 @@ const cors = require('cors')
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const helmet = require("helmet");
+const http = require('http');
+const socketIO = require('socket.io');
 const morgan = require("morgan");
 const multer = require("multer");
 const userRoute = require("./routes/user");
@@ -227,8 +229,9 @@ app.get('/api/top-posts', async (req, res) => {
 
 
 // socket
+const server = http.createServer(app);
 
-const io = require("socket.io")(8900, {
+const io = socketIO(server, {
   cors: {
     origin: "https://aplus-review-food-fe.onrender.com",
   },
