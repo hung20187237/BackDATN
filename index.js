@@ -1,12 +1,11 @@
 const express = require("express");
 const app = express();
-
+const { Server } = require('socket.io');
+const http = require('http');
 const cors = require('cors')
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const helmet = require("helmet");
-const http = require('http');
-const { Server } = require('socket.io');
 const morgan = require("morgan");
 const multer = require("multer");
 const userRoute = require("./routes/user");
@@ -106,6 +105,7 @@ app.post('/api/check-image', uploadImage.array("media", 12), async (req, res) =>
 
 app.post('/api/check-content', async (req, res) => {
 
+  console.log('req.body', req.body)
 
   try {
     const data = new FormData();
@@ -228,11 +228,16 @@ app.get('/api/top-posts', async (req, res) => {
 
 
 // socket
+
+// const io = require("socket.io")(8900, {
+//   cors: {
+//     origin: "http://localhost:3000/",
+//   },
+// });
 const server = http.createServer(app);
-console.log('server', server)
 const io = new Server(server, {
   cors: {
-    origin: "https://aplus-review-food-fe.onrender.com",
+    origin: "*",
     methods: ["GET", "POST"]
   }
 });
