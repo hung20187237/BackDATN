@@ -235,12 +235,33 @@ app.get('/api/top-posts', async (req, res) => {
 //   },
 // });
 const server = http.createServer(app);
+
+server.listen(8900, () => {
+  try {
+    console.log('connection');
+  } catch (e) {
+    console.log(e);
+  }
+});
+
 const io = new Server(server, {
   cors: {
     origin: "*",
     methods: ["GET", "POST"]
   }
 });
+
+// const io2 = new Server(server, {
+//   cors: {
+//     origin: "*",
+//     methods: ["GET", "POST"]
+//   }
+// });
+
+// io.on("connection123", (socket) => {
+//   //when ceonnect
+//   console.log("a user connected. 123");
+// });
 
 let users = [];
 
